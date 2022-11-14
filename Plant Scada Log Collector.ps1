@@ -67,7 +67,7 @@ wevtutil epl Application "$supportFolder\winLogs\Application.evtx"
 wevtutil epl Security "$supportFolder\winLogs\Security.evtx"
 
 echo "Exporting Process data..."
-Get-Process |  Select-Object -Property Id,Name,Product, Description, Company, FileVersion,StartTime,PrivateMemorySize,Handles,CPU,Path | Sort-Object -Property Id |Export-Csv -Path "$supportFolder\winLogs\Processes.csv" -Delimiter ',' -NoTypeInformation
+Get-Process |  Select-Object -Property Id,Name,SessionId,Product, Description, Company, FileVersion,StartTime,PrivateMemorySize,Handles,CPU,Path | Sort-Object -Property Id |Export-Csv -Path "$supportFolder\winLogs\Processes.csv" -Delimiter ',' -NoTypeInformation
 Get-CimInstance win32_process | Select-Object -Property ProcessId,Name, CreationDate,CommandLine | Sort-Object -Property ProcessId |Export-Csv -Path "$supportFolder\winLogs\ProcessesCommandLines.csv" -Delimiter ',' -NoTypeInformation
 echo "Exporting Current Logged Users Sessions data..."
 query user /server:$(hostname) > "$supportFolder\winLogs\users_sessions.txt"
